@@ -1,15 +1,12 @@
-import random
+from numpy import random
 
 
-def randomNumberGenerator():
-    start = 1
-    end = 10000
+def randomNumberGenerator(start, scl):
     # Generator losuje liczby od 1 do 10000 w celu symulacji prawdopodobienstwa
     # Poziom dokladnosci prawdopodobienstwa wynosi 0,01%
     # tzn aby wykonalo sie zdarzenie o prawdopodobienstwie 95,23%, musi wylosowac sie liczba 9532 lub mniejsza
-    while True:
-        yield random.randint(start, end)
-    pass
+    x = random.normal(loc= start, scale = scl)
+    return x
 
 
 def checkEvent(prob, rng):
@@ -26,13 +23,11 @@ def checkEvent(prob, rng):
 class Simulation:
 
     def __init__(self):
-        num_iteration = 10
-        probability = 8000
-        #zdarzenie z 80%
-        rng = randomNumberGenerator()
+        probability = 5000
+        #zdarzenie z 40%
+        result = randomNumberGenerator(5000, 10)
+        checkEvent(probability, result)
 
-        for _ in range(num_iteration):
-            print("Wydarzenie:", _+1)
-            checkEvent(probability, next(rng))
+
 
         # tymczasowa prezentacja dzialania symulatora
