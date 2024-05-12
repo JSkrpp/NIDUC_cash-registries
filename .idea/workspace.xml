@@ -4,10 +4,9 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="57c45f28-968a-4f0e-8bcf-c7dd7d520f24" name="Changes" comment="Added base number generator">
-      <change afterPath="$PROJECT_DIR$/Simulation/Klient.py" afterDir="false" />
+    <list default="true" id="57c45f28-968a-4f0e-8bcf-c7dd7d520f24" name="Changes" comment="Added basic paramaters of client class, which will be used in the simulation">
+      <change afterPath="$PROJECT_DIR$/Simulation/Kasa.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Simulation/Simulation.py" beforeDir="false" afterPath="$PROJECT_DIR$/Simulation/Simulation.py" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -26,6 +25,9 @@
   </component>
   <component name="GitToolBoxStore">
     <option name="projectConfigVersion" value="5" />
+  </component>
+  <component name="MarkdownSettingsMigration">
+    <option name="stateVersion" value="1" />
   </component>
   <component name="ProjectColorInfo">{
   &quot;associatedIndex&quot;: 8
@@ -123,7 +125,7 @@
       <option name="presentableId" value="Default" />
       <updated>1713639920895</updated>
       <workItem from="1713639923947" duration="2693000" />
-      <workItem from="1715530459853" duration="3297000" />
+      <workItem from="1715530459853" duration="4475000" />
     </task>
     <task id="LOCAL-00001" summary="Added base number generator">
       <option name="closed" value="true" />
@@ -141,7 +143,15 @@
       <option name="project" value="LOCAL" />
       <updated>1713642144265</updated>
     </task>
-    <option name="localTasksCounter" value="3" />
+    <task id="LOCAL-00003" summary="Added basic paramaters of client class, which will be used in the simulation">
+      <option name="closed" value="true" />
+      <created>1715534169396</created>
+      <option name="number" value="00003" />
+      <option name="presentableId" value="LOCAL-00003" />
+      <option name="project" value="LOCAL" />
+      <updated>1715534169396</updated>
+    </task>
+    <option name="localTasksCounter" value="4" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -160,7 +170,8 @@
   </component>
   <component name="VcsManagerConfiguration">
     <MESSAGE value="Added base number generator" />
-    <option name="LAST_COMMIT_MESSAGE" value="Added base number generator" />
+    <MESSAGE value="Added basic paramaters of client class, which will be used in the simulation" />
+    <option name="LAST_COMMIT_MESSAGE" value="Added basic paramaters of client class, which will be used in the simulation" />
   </component>
   <component name="com.intellij.coverage.CoverageDataManagerImpl">
     <SUITE FILE_PATH="coverage/NIDUC_cash_registries$main.coverage" NAME="main Coverage Results" MODIFIED="1713640364253" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/../cos" />
