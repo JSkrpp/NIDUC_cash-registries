@@ -2,6 +2,7 @@ import random
 
 
 class Klient:
+    totalTime = 0
 
     def __init__(self, idTransaction : int):
         self.exists = True
