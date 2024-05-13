@@ -127,7 +127,7 @@
       <updated>1713639920895</updated>
       <workItem from="1713639923947" duration="2693000" />
       <workItem from="1715530459853" duration="4498000" />
-      <workItem from="1715630718304" duration="2171000" />
+      <workItem from="1715630718304" duration="2838000" />
     </task>
     <task id="LOCAL-00001" summary="Added base number generator">
       <option name="closed" value="true" />
@@ -161,7 +161,15 @@
       <option name="project" value="LOCAL" />
       <updated>1715535091416</updated>
     </task>
-    <option name="localTasksCounter" value="5" />
+    <task id="LOCAL-00005" summary="Dodano klase kasy wraz z parametrami">
+      <option name="closed" value="true" />
+      <created>1715633563550</created>
+      <option name="number" value="00005" />
+      <option name="presentableId" value="LOCAL-00005" />
+      <option name="project" value="LOCAL" />
+      <updated>1715633563550</updated>
+    </task>
+    <option name="localTasksCounter" value="6" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
