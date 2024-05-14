@@ -8,6 +8,8 @@
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Simulation/Kasa.py" beforeDir="false" afterPath="$PROJECT_DIR$/Simulation/Kasa.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Simulation/Klient.py" beforeDir="false" afterPath="$PROJECT_DIR$/Simulation/Klient.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Simulation/Simulation.py" beforeDir="false" afterPath="$PROJECT_DIR$/Simulation/Simulation.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/main.py" beforeDir="false" afterPath="$PROJECT_DIR$/main.py" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -127,7 +129,7 @@
       <updated>1713639920895</updated>
       <workItem from="1713639923947" duration="2693000" />
       <workItem from="1715530459853" duration="4498000" />
-      <workItem from="1715630718304" duration="2838000" />
+      <workItem from="1715630718304" duration="12290000" />
     </task>
     <task id="LOCAL-00001" summary="Added base number generator">
       <option name="closed" value="true" />
@@ -169,7 +171,15 @@
       <option name="project" value="LOCAL" />
       <updated>1715633563550</updated>
     </task>
-    <option name="localTasksCounter" value="6" />
+    <task id="LOCAL-00006" summary="Dodano klase kasy wraz z parametrami">
+      <option name="closed" value="true" />
+      <created>1715633592800</created>
+      <option name="number" value="00006" />
+      <option name="presentableId" value="LOCAL-00006" />
+      <option name="project" value="LOCAL" />
+      <updated>1715633592800</updated>
+    </task>
+    <option name="localTasksCounter" value="7" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -194,6 +204,6 @@
   </component>
   <component name="com.intellij.coverage.CoverageDataManagerImpl">
     <SUITE FILE_PATH="coverage/NIDUC_cash_registries$main.coverage" NAME="main Coverage Results" MODIFIED="1713640364253" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/../cos" />
-    <SUITE FILE_PATH="coverage/NIDUC_cash_registries$main__1_.coverage" NAME="main (1) Coverage Results" MODIFIED="1715533352147" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
+    <SUITE FILE_PATH="coverage/NIDUC_cash_registries$main__1_.coverage" NAME="main (1) Coverage Results" MODIFIED="1715643010298" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
   </component>
 </project>

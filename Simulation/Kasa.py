@@ -13,14 +13,14 @@ class Kasa:
         self.totalTransaction = 0
         self.queue = []
         self.maxCapacity = maxCapacity
-        self.temp = Klient # potrzeny do poprawnej implementacji dzialania kasy pustej ale otwartej
+        self.temp = Klient  # potrzeny do poprawnej implementacji dzialania kasy pustej ale otwartej
         self.temp.totalTime = 0
         self.cash = 2000
         self.current = self.temp
         self.idleTimer = 0
         self.serving = False
 
-    def getTotalTranscaction(self):
+    def getTotalTransaction(self):
         return self.totalTransaction
 
     def getActive(self):
@@ -34,6 +34,7 @@ class Kasa:
 
     def getIncident(self):
         return self.incident
+
     def getDowntime(self):
         return self.downtime
 
@@ -67,10 +68,11 @@ class Kasa:
 
     def addClient(self, klient: Klient):
         if self.getQueuesize() < self.maxCapacity:
+            print(f"Do kasy {self.id} przydzielono klienta {klient.id}. ")
             self.queue.append(klient)
             return 1
         else:
-            return -7 # errorcode przepelnienia kasy
+            return -7   # errorcode
 
     def addCash(self, cash: int):
         if self.cash < 15000:
@@ -94,6 +96,7 @@ class Kasa:
                 kolejka.append(self.queue.pop(0))
         self.active = False
         self.idleTimer = 0
+
     def serveClient(self):
         if not self.getActive(): return -7
         if self.current.totalTime == 0 and len(self.queue) > 0: # klient skonczyl obsluge, jest kolejka
