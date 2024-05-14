@@ -35,6 +35,9 @@ class Kasa:
     def getIncident(self):
         return self.incident
 
+    def getService(self):
+        return self.service
+
     def getDowntime(self):
         return self.downtime
 
@@ -98,7 +101,8 @@ class Kasa:
         self.idleTimer = 0
 
     def serveClient(self):
-        if not self.getActive(): return -7
+        if not self.getActive():
+            return -7
         if self.current.totalTime == 0 and len(self.queue) > 0: # klient skonczyl obsluge, jest kolejka
             self.serving = True
             if len(self.queue) > 0:

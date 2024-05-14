@@ -4,12 +4,10 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="57c45f28-968a-4f0e-8bcf-c7dd7d520f24" name="Changes" comment="Dodano klase kasy wraz z parametrami">
+    <list default="true" id="57c45f28-968a-4f0e-8bcf-c7dd7d520f24" name="Changes" comment="Dodano szklielet symulacji">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Simulation/Kasa.py" beforeDir="false" afterPath="$PROJECT_DIR$/Simulation/Kasa.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Simulation/Klient.py" beforeDir="false" afterPath="$PROJECT_DIR$/Simulation/Klient.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Simulation/Simulation.py" beforeDir="false" afterPath="$PROJECT_DIR$/Simulation/Simulation.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/main.py" beforeDir="false" afterPath="$PROJECT_DIR$/main.py" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -130,6 +128,9 @@
       <workItem from="1713639923947" duration="2693000" />
       <workItem from="1715530459853" duration="4498000" />
       <workItem from="1715630718304" duration="12290000" />
+      <workItem from="1715676156720" duration="71000" />
+      <workItem from="1715676235065" duration="9000" />
+      <workItem from="1715677671281" duration="734000" />
     </task>
     <task id="LOCAL-00001" summary="Added base number generator">
       <option name="closed" value="true" />
@@ -179,7 +180,15 @@
       <option name="project" value="LOCAL" />
       <updated>1715633592800</updated>
     </task>
-    <option name="localTasksCounter" value="7" />
+    <task id="LOCAL-00007" summary="Dodano szklielet symulacji">
+      <option name="closed" value="true" />
+      <created>1715676199297</created>
+      <option name="number" value="00007" />
+      <option name="presentableId" value="LOCAL-00007" />
+      <option name="project" value="LOCAL" />
+      <updated>1715676199297</updated>
+    </task>
+    <option name="localTasksCounter" value="8" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -200,10 +209,11 @@
     <MESSAGE value="Added base number generator" />
     <MESSAGE value="Added basic paramaters of client class, which will be used in the simulation" />
     <MESSAGE value="Dodano klase kasy wraz z parametrami" />
-    <option name="LAST_COMMIT_MESSAGE" value="Dodano klase kasy wraz z parametrami" />
+    <MESSAGE value="Dodano szklielet symulacji" />
+    <option name="LAST_COMMIT_MESSAGE" value="Dodano szklielet symulacji" />
   </component>
   <component name="com.intellij.coverage.CoverageDataManagerImpl">
     <SUITE FILE_PATH="coverage/NIDUC_cash_registries$main.coverage" NAME="main Coverage Results" MODIFIED="1713640364253" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/../cos" />
-    <SUITE FILE_PATH="coverage/NIDUC_cash_registries$main__1_.coverage" NAME="main (1) Coverage Results" MODIFIED="1715643010298" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
+    <SUITE FILE_PATH="coverage/NIDUC_cash_registries$main__1_.coverage" NAME="main (1) Coverage Results" MODIFIED="1715678381520" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
   </component>
 </project>

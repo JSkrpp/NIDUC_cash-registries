@@ -109,12 +109,12 @@ class Simulation:
                 elif godzina + self.openingTime == 14 or godzina + self.openingTime == 18:
                     self.rushHour = False
 
-                for i in range(60):
+                for i in range(10):
                     print(f"Minuta : {i}")
 
                         #  TODO: zmiany w ewentualnym GUI w kazdej minucie przpeprowadzonej symulacji
 
-                    if hours - godzina == 0 and i == 30:
+                    if hours - godzina == 1 and i == 30:
                         self.closingTime = True  # czas zamkniecia sklepu, nowi klienci nie przychodza
 
                     if not self.closingTime:
@@ -169,7 +169,7 @@ class Simulation:
                                 self.registries[k].cash = 2000
 
                         if self.registries[k].getActive():
-                            print(f"kasa ", k+1, " stoi, ", {self.registries[k].getIdle()}, "pusta")
+                            print(f"kasa", k+1, "stoi",self.registries[k].getIdle(), "minut pusta")
                         if self.registries[k].getIdle() == 5:
                             self.registries[k].close(self.clients)
 
@@ -178,7 +178,7 @@ class Simulation:
 
                         if self.registries[k].getIncident():
                             self.registries[k].service -= 1
-                            if self.registries[k] == 0:
+                            if self.registries[k].getService() == 0:
                                 self.registries[k].brokenStop()
                                 self.registries[k].open()
 
@@ -198,5 +198,6 @@ class Simulation:
             print(f"Wygenerowano klienta nr {newClient.id}, czas obslugi wynosi {self.clients[client].totalTime}. ")
 
     def genIncident(self, kasa: Kasa): # metoda generuje wypadek o prawdopod. 10% o dlugosci od 1 do 3 minut
-        if random.randint(1, 10)==5:
+        if random.randint(1, 20)==5:
             kasa.setDowntime(random.randint(1, 3))
+            print(f"AWARIA KASY", kasa.id)
