@@ -1,23 +1,9 @@
 from numpy import random
+import time
 
 from Simulation.Kasa import Kasa
 from Simulation.Klient import Klient
-
-
-def randomNumberGenerator(start, scl):
-    x = random.normal(loc= start, scale = scl)
-    return x
-
-
-def checkEvent(prob, rng):
-    if rng < prob:
-        print(rng)
-        print("True")
-        print(" ")
-    else:
-        print(rng)
-        print("False")
-        print(" ")
+from Simulation.MyGui import MyGui
 
 
 class Simulation:
@@ -30,7 +16,7 @@ class Simulation:
     rushHour = False
 
     maxTransactions = 50
-    serviceTime = 15
+    serviceTime = 5
     maxCapacity = 0
 
     #  wszelkie statystyki przeprowadzonego badania, ktore moga byc istotne
@@ -39,6 +25,8 @@ class Simulation:
     clientsCard = 0
     clientsLocal = 0
     clientsWroclaw = 0
+    familyTotal = 0
+    cashTotal = 0
     avgAge = 0
     avgTime = 0
 
@@ -47,8 +35,10 @@ class Simulation:
     clientsCardHour = 0
     clientsLocalHour = 0
     clientsWroclawHour = 0
+    familyTotalHour = 0
     avgAgeHour = 0
     avgTimeHour = 0
+    cashTotalHour = 0
     issues = 0
     queueOverflow = 0  # zlicza ilosc sytuacji, w ktorych kolejka zostala przepel
 
@@ -56,16 +46,18 @@ class Simulation:
     clientsCardDay = 0
     clientsLocalDay = 0
     clientsWroclawDay = 0
+    familyTotalDay = 0
+    cashTotalDay = 0
     avgAgeDay = 0
     avgTimeDay = 0
 
     def __init__(self, amount: int, days: int, hours: int, maxCapacity: int):
         self.start(amount, maxCapacity)
+        self.gui = MyGui(amount, maxCapacity)
         self.theSimulation(days, hours)
 
     def addKasa(self, index: int, maxCapacity: int):
         self.registries.append(Kasa(index, maxCapacity))
-        print(f"Utworzono kase {index}, obslugujaca {maxCapacity} klientow")
 
     def start(self, amount: int, maxCap: int):
         self.maxCapacity = maxCap
@@ -77,7 +69,10 @@ class Simulation:
     def theSimulation(self, days: int, hours: int):
         for dzien in range(days):
 
-            # TODO: ewentualne GUI
+            for k in range(len(self.registries)):
+                self.registries[k].resetQueue()
+
+            self.gui.display_days(dzien % 7)
 
             self.openingTime = 8
 
@@ -112,7 +107,17 @@ class Simulation:
                 for i in range(60):
                     print(f"Minuta : {i}")
 
-                        #  TODO: zmiany w ewentualnym GUI w kazdej minucie przpeprowadzonej symulacji
+                    for k in range(len(self.registries)):
+                        if self.registries[k].getActive():
+                            self.gui.kasa_change_color(k, "green")
+                        else:
+                            self.gui.kasa_change_color(k, "red")
+                        if self.registries[k].getIncident():
+                            self.gui.kasa_change_color(k, "gray")
+                        if self.registries[k].getService():
+                            self.gui.kasa_change_color(k, "orange")
+
+                    self.gui.display_numbers((godzina + self.openingTime), i)
 
                     if hours - godzina == 1 and i == 30:
                         self.closingTime = True  # czas zamkniecia sklepu, nowi klienci nie przychodza
@@ -134,15 +139,23 @@ class Simulation:
                         j = 0
 
                     while len(self.clients) > 0 and j < len(self.registries):
+                        if j == len(self.registries) and len(self.clients) > 0:
+                            break
                         if self.registries[j].addClient(self.clients[0]) == 1:
                             self.clients.pop(0)
-                        elif self.registries[j].addClient(self.clients[0]) == -7:
+                            j = 0
+                        elif self.registries[j].addClient(self.clients[0]) == -7 and j < len(self.registries)-1:
                             j += 1
-                        elif not self.registries[j].getActive():
+                        if not self.registries[j].getActive():
                             self.registries[j].setActive(True)
+
 
                     for k in range(len(self.registries)):
                         print(f"{len(self.registries[k].queue)}, zapelnienie kasy")
+
+                    for k in range(len(self.registries)):
+                        self.gui.klienci_change_color(k, self.registries[k].getQueuesize(), self.maxCapacity)
+                    time.sleep(0.2)
 
                     if len(self.clients) != 0:
                         self.queueOverflow += 1
@@ -152,7 +165,7 @@ class Simulation:
                     for k in range(len(self.registries)):
                         if self.registries[k].getDowntime() == 0 and self.registries[k].getIncident():
                             self.registries[k].resetDowntime()
-                        elif self.registries[k].getDowntime() != 0:
+                        elif self.registries[k].getDowntime() > 0:
                             self.registries[k].downtime = -1
 
                         if self.registries[k].getActive():  # sprawdzanie maksymalnej ilosci transakcji
@@ -171,7 +184,7 @@ class Simulation:
                                 self.registries[k].cash = 2000
 
                         if self.registries[k].getActive():
-                            print(f"kasa", k+1, "stoi",self.registries[k].getIdle(), "minut pusta")
+                            print(f"kasa", k+1, "stoi", self.registries[k].getIdle(), "minut pusta")
                         if self.registries[k].getIdle() == 5:
                             self.registries[k].close(self.clients)
 
@@ -183,6 +196,7 @@ class Simulation:
                             if self.registries[k].getService() == 0:
                                 self.registries[k].brokenStop()
                                 self.registries[k].open()
+
         self.showStats()
 
     def genClient(self, rush: bool):
@@ -190,16 +204,22 @@ class Simulation:
             maxAmount = 8
             minAmount = 3
         else:
-            maxAmount = 4
+            maxAmount = 5
             minAmount = 0
 
         for client in range(random.randint(minAmount, maxAmount)):
             newClient = Klient(self.clientsTotal)
             self.clients.append(newClient)
-            print(f"Wygenerowano klienta nr {newClient.id}, czas obslugi wynosi {self.clients[client].totalTime}. ")
+            print(f"Wygenerowano klienta nr {newClient.id},z rodzina {newClient.family} czas obslugi wynosi {self.clients[client].totalTime}. ")
             self.clientsTotal += 1
             self.clientsTotalDay += 1
             self.clientsTotalHour += 1
+            self.familyTotal += newClient.getFamily()
+            self.familyTotalDay += newClient.getFamily()
+            self.familyTotalHour += newClient.getFamily()
+            self.cashTotal += newClient.total
+            self.cashTotalDay += newClient.total
+            self.cashTotalHour += newClient.total
             if newClient.card == 1:
                 self.clientsCard += 1
                 self.clientsCardHour += 1
@@ -222,10 +242,13 @@ class Simulation:
         print(f"Klieci spoza Wrocławia: {self.clientsTotal - self.clientsWroclaw}")
         print(f"Klienci polacy: {self.clientsLocal}")
         print(f"Klienci niepolacy: {self.clientsTotal - self.clientsLocal}")
+        print(f"Koszt calkowity zakupow: {self.cashTotal} ")
+        print(f"Ilosc rodziny z klientami: {self.familyTotal}")
         print(f"Ilosc awarii: {self.issues}")
         print(f"Ilosc przepelnien: {self.queueOverflow}")
 
     def genIncident(self, kasa: Kasa): # metoda generuje wypadek o prawdopod. 10% o dlugosci od 1 do 3 minut
-        if random.randint(1, 20)==5:
+        if random.randint(1, 50) == 5:
             kasa.setDowntime(random.randint(1, 3))
             print(f"AWARIA KASY", kasa.id)
+            self.issues += 1

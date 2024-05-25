@@ -110,9 +110,13 @@ class Kasa:
                 self.addCash(self.current.total)
                 self.current.totalTime -= 1
                 self.idleTimer = 0
+                self.totalTransaction += 1
         elif self.current.totalTime == 0:
             self.serving = False
             self.current = self.temp
             self.idleTimer += 1
         else:
             self.current.totalTime -= 1
+
+    def resetQueue(self):
+        self.queue = []

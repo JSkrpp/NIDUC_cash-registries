@@ -4,9 +4,13 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="57c45f28-968a-4f0e-8bcf-c7dd7d520f24" name="Changes" comment="Naprawiono przydzielanie klientów do kasy">
+    <list default="true" id="57c45f28-968a-4f0e-8bcf-c7dd7d520f24" name="Changes" comment="Dodano zliczanie statystyk ogolnych">
+      <change afterPath="$PROJECT_DIR$/Simulation/MyGui.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Simulation/Kasa.py" beforeDir="false" afterPath="$PROJECT_DIR$/Simulation/Kasa.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Simulation/Klient.py" beforeDir="false" afterPath="$PROJECT_DIR$/Simulation/Klient.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Simulation/Simulation.py" beforeDir="false" afterPath="$PROJECT_DIR$/Simulation/Simulation.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/main.py" beforeDir="false" afterPath="$PROJECT_DIR$/main.py" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -38,23 +42,23 @@
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent"><![CDATA[{
-  "keyToString": {
-    "Python.main (1).executor": "Run",
-    "Python.main.executor": "Run",
-    "RunOnceActivity.OpenProjectViewOnStart": "true",
-    "RunOnceActivity.ShowReadmeOnStart": "true",
-    "SHARE_PROJECT_CONFIGURATION_FILES": "true",
-    "last_opened_file_path": "C:/Users/Admin/PycharmProjects/cos",
-    "node.js.detected.package.eslint": "true",
-    "node.js.detected.package.tslint": "true",
-    "node.js.selected.package.eslint": "(autodetect)",
-    "node.js.selected.package.tslint": "(autodetect)",
-    "nodejs_package_manager_path": "npm",
-    "settings.editor.selected.configurable": "org.jetbrains.plugins.github.ui.GithubSettingsConfigurable",
-    "vue.rearranger.settings.migration": "true"
+  <component name="PropertiesComponent">{
+  &quot;keyToString&quot;: {
+    &quot;Python.main (1).executor&quot;: &quot;Run&quot;,
+    &quot;Python.main.executor&quot;: &quot;Run&quot;,
+    &quot;RunOnceActivity.OpenProjectViewOnStart&quot;: &quot;true&quot;,
+    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
+    &quot;SHARE_PROJECT_CONFIGURATION_FILES&quot;: &quot;true&quot;,
+    &quot;last_opened_file_path&quot;: &quot;C:/Users/Admin/PycharmProjects/cos&quot;,
+    &quot;node.js.detected.package.eslint&quot;: &quot;true&quot;,
+    &quot;node.js.detected.package.tslint&quot;: &quot;true&quot;,
+    &quot;node.js.selected.package.eslint&quot;: &quot;(autodetect)&quot;,
+    &quot;node.js.selected.package.tslint&quot;: &quot;(autodetect)&quot;,
+    &quot;nodejs_package_manager_path&quot;: &quot;npm&quot;,
+    &quot;settings.editor.selected.configurable&quot;: &quot;org.jetbrains.plugins.github.ui.GithubSettingsConfigurable&quot;,
+    &quot;vue.rearranger.settings.migration&quot;: &quot;true&quot;
   }
-}]]></component>
+}</component>
   <component name="RunManager" selected="Python.main (1)">
     <configuration name="main (1)" type="PythonConfigurationType" factoryName="Python" temporary="true" nameIsGenerated="true">
       <module name="NIDUC_cash-registries" />
@@ -131,7 +135,8 @@
       <workItem from="1715676235065" duration="9000" />
       <workItem from="1715677671281" duration="860000" />
       <workItem from="1715679950319" duration="704000" />
-      <workItem from="1716656562489" duration="1511000" />
+      <workItem from="1716656562489" duration="7639000" />
+      <workItem from="1716666631059" duration="709000" />
     </task>
     <task id="LOCAL-00001" summary="Added base number generator">
       <option name="closed" value="true" />
@@ -205,7 +210,15 @@
       <option name="project" value="LOCAL" />
       <updated>1716656943208</updated>
     </task>
-    <option name="localTasksCounter" value="10" />
+    <task id="LOCAL-00010" summary="Dodano zliczanie statystyk ogolnych">
+      <option name="closed" value="true" />
+      <created>1716658464057</created>
+      <option name="number" value="00010" />
+      <option name="presentableId" value="LOCAL-00010" />
+      <option name="project" value="LOCAL" />
+      <updated>1716658464057</updated>
+    </task>
+    <option name="localTasksCounter" value="11" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -229,10 +242,11 @@
     <MESSAGE value="Dodano szklielet symulacji" />
     <MESSAGE value="Dodano potwierdzenie awarii kas" />
     <MESSAGE value="Naprawiono przydzielanie klientów do kasy" />
-    <option name="LAST_COMMIT_MESSAGE" value="Naprawiono przydzielanie klientów do kasy" />
+    <MESSAGE value="Dodano zliczanie statystyk ogolnych" />
+    <option name="LAST_COMMIT_MESSAGE" value="Dodano zliczanie statystyk ogolnych" />
   </component>
   <component name="com.intellij.coverage.CoverageDataManagerImpl">
     <SUITE FILE_PATH="coverage/NIDUC_cash_registries$main.coverage" NAME="main Coverage Results" MODIFIED="1713640364253" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/../cos" />
-    <SUITE FILE_PATH="coverage/NIDUC_cash_registries$main__1_.coverage" NAME="main (1) Coverage Results" MODIFIED="1716658010790" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
+    <SUITE FILE_PATH="coverage/NIDUC_cash_registries$main__1_.coverage" NAME="main (1) Coverage Results" MODIFIED="1716667319885" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
   </component>
 </project>
