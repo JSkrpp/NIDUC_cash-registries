@@ -2,14 +2,13 @@ import random
 
 
 class Klient:
-    totalTime = 0
 
     def __init__(self, id : int):
         self.exists = True
         self.family = random.randint(0, 5)
         self.id = id
         self.local = random.randint(0, 1)
-        self.wroclaw = random.randint(0, 2)
+        self.wroclaw = random.randint(0, 1)
         self.family = random.randint(0, 5)
         self.total = random.randint (10, 500) * self.family
         self.age = random.randint(10, 90)

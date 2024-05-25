@@ -134,7 +134,9 @@ class Simulation:
                         j = 0
 
                     while len(self.clients) > 0 and j < len(self.registries):
-                        if self.registries[j].addClient(self.clients.pop(0)) == -7:
+                        if self.registries[j].addClient(self.clients[0]) == 1:
+                            self.clients.pop(0)
+                        elif self.registries[j].addClient(self.clients[0]) == -7:
                             j += 1
                         elif not self.registries[j].getActive():
                             self.registries[j].setActive(True)
