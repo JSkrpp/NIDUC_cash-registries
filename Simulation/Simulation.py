@@ -109,7 +109,7 @@ class Simulation:
                 elif godzina + self.openingTime == 14 or godzina + self.openingTime == 18:
                     self.rushHour = False
 
-                for i in range(10):
+                for i in range(60):
                     print(f"Minuta : {i}")
 
                         #  TODO: zmiany w ewentualnym GUI w kazdej minucie przpeprowadzonej symulacji
@@ -183,11 +183,11 @@ class Simulation:
                             if self.registries[k].getService() == 0:
                                 self.registries[k].brokenStop()
                                 self.registries[k].open()
-
+        self.showStats()
 
     def genClient(self, rush: bool):
         if rush:
-            maxAmount = 6
+            maxAmount = 8
             minAmount = 3
         else:
             maxAmount = 4
@@ -195,9 +195,35 @@ class Simulation:
 
         for client in range(random.randint(minAmount, maxAmount)):
             newClient = Klient(self.clientsTotal)
-            self.clientsTotal += 1
             self.clients.append(newClient)
             print(f"Wygenerowano klienta nr {newClient.id}, czas obslugi wynosi {self.clients[client].totalTime}. ")
+            self.clientsTotal += 1
+            self.clientsTotalDay += 1
+            self.clientsTotalHour += 1
+            if newClient.card == 1:
+                self.clientsCard += 1
+                self.clientsCardHour += 1
+                self.clientsCardDay += 1
+            if newClient.wroclaw > 0:
+                self.clientsWroclaw += 1
+                self.clientsWroclawHour += 1
+                self.clientsWroclawDay += 1
+            if newClient.local > 0:
+                self.clientsLocal += 1
+                self.clientsLocalDay += 1
+                self.clientsLocalHour += 1
+
+
+    def showStats(self):
+        print(f"Wszyscy klienci:{self.clientsTotal} ")
+        print(f"Klienci placacy karta: {self.clientsCard}")
+        print(f"Klienci placacy gotowka: {self.clientsTotal - self.clientsCard}")
+        print(f"Klienci z Wrocławia: {self.clientsWroclaw}")
+        print(f"Klieci spoza Wrocławia: {self.clientsTotal - self.clientsWroclaw}")
+        print(f"Klienci polacy: {self.clientsLocal}")
+        print(f"Klienci niepolacy: {self.clientsTotal - self.clientsLocal}")
+        print(f"Ilosc awarii: {self.issues}")
+        print(f"Ilosc przepelnien: {self.queueOverflow}")
 
     def genIncident(self, kasa: Kasa): # metoda generuje wypadek o prawdopod. 10% o dlugosci od 1 do 3 minut
         if random.randint(1, 20)==5:
