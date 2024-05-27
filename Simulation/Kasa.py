@@ -57,6 +57,9 @@ class Kasa:
     def getBroken(self):
         return self.broken
 
+    def setBroken(self, new: bool):
+        self.broken = new
+
     def getQueue(self):
         return self.queue
 
@@ -91,19 +94,19 @@ class Kasa:
         self.service = 0
 
     def open(self):
-        self.active = True
+        self.setActive(True)
 
     def close(self, kolejka):
         if len(self.queue) > 0:
             while len(self.queue) > 0:
                 kolejka.append(self.queue.pop(0))
-        self.active = False
+        self.setActive(False)
         self.idleTimer = 0
 
     def serveClient(self):
         if not self.getActive():
             return -7
-        if self.current.totalTime == 0 and len(self.queue) > 0: # klient skonczyl obsluge, jest kolejka
+        if self.current.totalTime == 0 and len(self.queue) > 0:  # klient skonczyl obsluge, jest kolejka
             self.serving = True
             if len(self.queue) > 0:
                 self.current = self.queue.pop(0)

@@ -4,13 +4,14 @@ import time
 from Simulation.Kasa import Kasa
 from Simulation.Klient import Klient
 from Simulation.MyGui import MyGui
+from matplotlib import pyplot as plt
 
 
 class Simulation:
 
     registries = []
     clients = []
-    statsTotal = []
+    stats = []
     statsDaily = []
     closingTime = False  #  okresla ostatnie 30 minut otwarcia sklepu
     rushHour = False
@@ -29,6 +30,8 @@ class Simulation:
     cashTotal = 0
     avgAge = 0
     avgTime = 0
+    issuesTotal = 0
+    clientsnoServedTotal = 0
 
     #  statstyki godzinowe
     clientsTotalHour = 0
@@ -39,7 +42,7 @@ class Simulation:
     avgAgeHour = 0
     avgTimeHour = 0
     cashTotalHour = 0
-    issues = 0
+    issuesHour = 0
     queueOverflow = 0  # zlicza ilosc sytuacji, w ktorych kolejka zostala przepel
 
     clientsTotalDay = 0
@@ -48,8 +51,10 @@ class Simulation:
     clientsWroclawDay = 0
     familyTotalDay = 0
     cashTotalDay = 0
+    issuesDay = 0
     avgAgeDay = 0
     avgTimeDay = 0
+    clientsnoserveDay = 0
 
     def __init__(self, amount: int, days: int, hours: int, maxCapacity: int):
         self.start(amount, maxCapacity)
@@ -62,16 +67,16 @@ class Simulation:
     def start(self, amount: int, maxCap: int):
         self.maxCapacity = maxCap
         for x in range(amount):
-           self.addKasa(x+1, maxCap)
-        self.registries[0].active = True
-
+            self.addKasa(x+1, maxCap)
+            self.registries[0].active = True
 
     def theSimulation(self, days: int, hours: int):
         for dzien in range(days):
 
             for k in range(len(self.registries)):
-                self.registries[k].resetQueue()
+                self.registries[k].setActive(False)
 
+            self.registries[0].setActive(True)
             self.gui.display_days(dzien % 7)
 
             self.openingTime = 8
@@ -85,8 +90,9 @@ class Simulation:
             self.clientsWroclawDay = 0
             self.avgAgeDay = 0
             self.avgTimeDay = 0
-            self.issues = 0
+            self.issuesDay = 0
             self.queueOverflow = 0
+            self.clientsnoserveDay = 0
 
             print(f"Dzien: {dzien}")
             for godzina in range(hours):
@@ -98,6 +104,7 @@ class Simulation:
                 self.clientsWroclawHour = 0
                 self.avgAgeHour = 0
                 self.avgTimeHour = 0
+                self.issuesHour = 0
 
                 if godzina + self.openingTime == 12 or godzina + self.openingTime == 16:
                     self.rushHour = True
@@ -149,13 +156,12 @@ class Simulation:
                         if not self.registries[j].getActive():
                             self.registries[j].setActive(True)
 
-
                     for k in range(len(self.registries)):
                         print(f"{len(self.registries[k].queue)}, zapelnienie kasy")
 
                     for k in range(len(self.registries)):
                         self.gui.klienci_change_color(k, self.registries[k].getQueuesize(), self.maxCapacity)
-                    time.sleep(0.2)
+                    #time.sleep(0.1)
 
                     if len(self.clients) != 0:
                         self.queueOverflow += 1
@@ -165,7 +171,9 @@ class Simulation:
                     for k in range(len(self.registries)):
                         if self.registries[k].getDowntime() == 0 and self.registries[k].getIncident():
                             self.registries[k].resetDowntime()
+                            self.registries[k].open()
                         elif self.registries[k].getDowntime() > 0:
+                            print(f"Czas naprawy {k} wynosi {self.registries[k].getDowntime()}")
                             self.registries[k].downtime = -1
 
                         if self.registries[k].getActive():  # sprawdzanie maksymalnej ilosci transakcji
@@ -173,14 +181,16 @@ class Simulation:
                                 self.registries[k].close(self.clients)
                                 self.registries[k].brokenStart(self.serviceTime)
                                 print(f"Awaria kasy nr {k}")
-                                self.issues += 1
+                                self.issuesTotal += 1
+                                self.issuesDay += 1
+                                self.issuesHour += 1
 
                         self.registries[k].serveClient()
                         if self.registries[k].current == self.registries[k].temp:
                             #  sprawdza czy stoi temp - kasa jest pusta
                             if self.registries[k].cash >= 15000:
                                 print(f"Kasa {k+1} pelna, przepraszamy")
-                                self.registries[k].setDowntime(3)
+                                self.registries[k].setDowntime(2)
                                 self.registries[k].cash = 2000
 
                         if self.registries[k].getActive():
@@ -196,7 +206,18 @@ class Simulation:
                             if self.registries[k].getService() == 0:
                                 self.registries[k].brokenStop()
                                 self.registries[k].open()
-
+                self.saveStatsHour()
+            for x in range(len(self.registries)):
+                self.registries[x].close(self.clients)
+            self.clientsnoserveDay += len(self.clients)
+            money = 0
+            for i in range (len(self.clients)):
+                money += self.clients[i].getCash()
+            self.cashTotalDay -= money
+            self.cashTotal -= money
+            self.clients = []
+            self.saveStatsDaily()
+        self.narysujWykres(days, hours, self.statsDaily, self.stats)
         self.showStats()
 
     def genClient(self, rush: bool):
@@ -204,7 +225,7 @@ class Simulation:
             maxAmount = 8
             minAmount = 3
         else:
-            maxAmount = 5
+            maxAmount = 3
             minAmount = 0
 
         for client in range(random.randint(minAmount, maxAmount)):
@@ -220,6 +241,9 @@ class Simulation:
             self.cashTotal += newClient.total
             self.cashTotalDay += newClient.total
             self.cashTotalHour += newClient.total
+            self.avgAge += newClient.age
+            self.avgAgeDay += newClient.age
+            self.avgAgeHour += newClient.age
             if newClient.card == 1:
                 self.clientsCard += 1
                 self.clientsCardHour += 1
@@ -244,11 +268,158 @@ class Simulation:
         print(f"Klienci niepolacy: {self.clientsTotal - self.clientsLocal}")
         print(f"Koszt calkowity zakupow: {self.cashTotal} ")
         print(f"Ilosc rodziny z klientami: {self.familyTotal}")
-        print(f"Ilosc awarii: {self.issues}")
+        print(f"Ilosc awarii: {self.issuesTotal}")
         print(f"Ilosc przepelnien: {self.queueOverflow}")
 
     def genIncident(self, kasa: Kasa): # metoda generuje wypadek o prawdopod. 10% o dlugosci od 1 do 3 minut
         if random.randint(1, 50) == 5:
             kasa.setDowntime(random.randint(1, 3))
             print(f"AWARIA KASY", kasa.id)
-            self.issues += 1
+            self.issuesDay += 1
+            self.issuesTotal += 1
+            self.issuesHour += 1
+
+    def saveStatsDaily(self):
+        staty = [
+            self.clientsTotalDay, self.avgAgeDay/self.clientsTotalDay, self.clientsCardDay,
+            self.clientsLocalDay, self.clientsWroclawDay, self.cashTotalDay, self.familyTotalDay,
+            self.clientsTotalDay - self.clientsLocalDay, self.clientsTotalDay - self.clientsWroclawDay,
+            self.issuesDay, self.clientsnoserveDay
+        ]
+        self.statsDaily.append(staty)
+
+    def saveStatsHour(self):
+        statyGodz = [
+            self.clientsTotalHour, self.avgAgeHour / self.clientsTotalHour, self.clientsCardHour,
+            self.clientsLocalHour, self.clientsWroclawHour, self.cashTotalHour, self.familyTotalHour,
+            self.clientsTotalHour - self.clientsLocalHour, self.clientsTotalHour - self.clientsWroclawHour,
+            self.issuesHour
+        ]
+        self.stats.append(statyGodz)
+
+    def narysujWykres(self, x, y, dane, godz):
+        temp = []
+        warx = []
+        warxy = []
+        for i in range(x):
+            warx.append(i)
+        for i in range(x*y):
+            warxy.append(i)
+        fig = plt.figure("Wykres 1")
+        for i in range(x):
+            temp.append(dane[i][0])
+        plt.plot(warx, temp)
+        plt.title('Ilosc klientow w ciagu x dni')
+        plt.xlabel('Dni')
+        plt.ylabel('Wszyscy klienci danego dnia')
+        plt.savefig(f"Wykres 1")
+        fig = plt.figure("Wykres 2")
+        for i in range(x):
+            temp.pop()
+        for i in range(x):
+            temp.append(dane[i][1])
+        plt.plot(warx, temp)
+        plt.title('Sredni wiek klienta w x dni')
+        plt.xlabel('Dni')
+        plt.ylabel('Sredni wiek')
+        plt.savefig(f"Wykres 2")
+        fig = plt.figure("Wykres 3")
+        for i in range(x):
+            temp.pop()
+        for i in range(x):
+            temp.append(dane[i][2])
+        plt.plot(warx, temp)
+        plt.title('Ilosc klientow placacych karta w x dni')
+        plt.xlabel('Dni')
+        plt.ylabel('Ilosc kart')
+        plt.savefig(f"Wykres 3")
+        fig = plt.figure("Wykres 4")
+        for i in range(x):
+            temp.pop()
+        for i in range(x):
+            temp.append(dane[i][3])
+        plt.plot(warx, temp)
+        plt.title('Ilosc klientow z Polski w x dni')
+        plt.xlabel('Dni')
+        plt.ylabel('Ilosc klientow')
+        plt.savefig(f"Wykres 4")
+        fig = plt.figure("Wykres 5")
+        for i in range(x):
+            temp.pop()
+        for i in range(x):
+            temp.append(dane[i][4])
+        plt.plot(warx, temp)
+        plt.title('Ilosc klientow z Wrocławia w x dni')
+        plt.xlabel('Dni')
+        plt.ylabel('Ilosc klientow')
+        plt.savefig(f"Wykres 5")
+        fig = plt.figure("Wykres 6")
+        for i in range(x):
+            temp.pop()
+        for i in range(x):
+            temp.append(dane[i][5])
+        plt.plot(warx, temp)
+        plt.title('Suma gotowki wydanej w sklepie ')
+        plt.xlabel('Dni')
+        plt.ylabel('Suma')
+        plt.savefig(f"Wykres 6")
+        fig = plt.figure("Wykres 7")
+        for i in range(x):
+            temp.pop()
+        for i in range(x):
+            temp.append(dane[i][6])
+        plt.plot(warx, temp)
+        plt.title('Ilosc rodziny z klientami w x dni')
+        plt.xlabel('Dni')
+        plt.ylabel('Ilosc rodziny')
+        plt.savefig(f"Wykres 7")
+        fig = plt.figure("Wykres 8")
+        for i in range(x):
+            temp.pop()
+        for i in range(x):
+            temp.append(dane[i][7])
+        plt.plot(warx, temp)
+        plt.title('Ilosc klientow z poza Polski w x dni')
+        plt.xlabel('Dni')
+        plt.ylabel('Ilosc klientow')
+        plt.savefig(f"Wykres 8")
+        fig = plt.figure("Wykres 9")
+        for i in range(x):
+            temp.pop()
+        for i in range(x):
+            temp.append(dane[i][8])
+        plt.plot(warx, temp)
+        plt.title('Ilosc klientow z poza Wrocławia w x dni')
+        plt.xlabel('Dni')
+        plt.ylabel('Ilosc klientow')
+        plt.savefig(f"Wykres 9")
+        fig = plt.figure("Wykres 10")
+        for i in range(x):
+            temp.pop()
+        for i in range(x):
+            temp.append(dane[i][9])
+        plt.plot(warx, temp)
+        plt.title('Ilosc awarii kas w x dni')
+        plt.xlabel('Dni')
+        plt.ylabel('Ilosc awarii')
+        plt.savefig(f"Wykres 10")
+        fig = plt.figure('Wykres 11')
+        for i in range(x):
+            temp.pop()
+        for i in range(x):
+            temp.append(dane[i][10])
+        plt.plot(warx, temp)
+        plt.title('Ilosc klientow nieobsluzonych w x dni')
+        plt.xlabel('Dni')
+        plt.ylabel('Nieobsluzeni klienci')
+        plt.savefig(f"Wykres 11")
+        fig = plt.figure('Wykres 12')
+        for i in range(x):
+            temp.pop()
+        for i in range(x*y):
+            temp.append(godz[i][0])
+        plt.plot(warxy, temp)
+        plt.title('Ilosc klientow w x godzin')
+        plt.xlabel('Godziny')
+        plt.ylabel('Ilosc klientow')
+        plt.savefig(f"Wykres 12")

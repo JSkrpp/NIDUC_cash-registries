@@ -15,10 +15,12 @@ class Klient:
         else:
             self.wroclaw = 0
         self.family = random.randint(0, 3)
-        self.total = random.randint (10, 500) * self.family
+        self.total = random.randint(10, 500) * self.family
         self.age = random.randint(10, 90)
         self.card = random.randint(0, 1)
-        self.totalTime = random.randint(1, 2) + (self.family * 1) - self.card # oblicza calkowity czas na obsluge wliczajac wielkosc rodziny oraz posiadanie karty
+        self.totalTime = random.randint(2, 3) - self.card # oblicza calkowity czas na obsluge wliczajac wielkosc rodziny oraz posiadanie karty
+        if self.family > 0:
+            self.totalTime += 1
 
     def getTotaltime(self):
         return self.totalTime
@@ -28,3 +30,6 @@ class Klient:
 
     def getFamily(self):
         return self.family
+
+    def getCash(self):
+        return self.total
