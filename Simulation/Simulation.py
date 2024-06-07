@@ -79,7 +79,7 @@ class Simulation:
             self.registries[0].setActive(True)
             self.gui.display_days(dzien % 7)
 
-            self.openingTime = 8
+            self.openingTime = 11
 
             # zerowanie statystyk dniowych
             self.rushHour = False
@@ -222,8 +222,8 @@ class Simulation:
 
     def genClient(self, rush: bool):
         if rush:
-            maxAmount = 8
-            minAmount = 3
+            maxAmount = 6
+            minAmount = 2
         else:
             maxAmount = 3
             minAmount = 0
