@@ -79,7 +79,7 @@ class Simulation:
             self.registries[0].setActive(True)
             self.gui.display_days(dzien % 7)
 
-            self.openingTime = 11
+            self.openingTime = 8
 
             # zerowanie statystyk dniowych
             self.rushHour = False
@@ -409,7 +409,7 @@ class Simulation:
         for i in range(x):
             temp.append(dane[i][10])
         plt.plot(warx, temp)
-        plt.title('Ilosc klientow nieobsluzonych w x dni')
+        plt.title('Liczba klientow nieobsluzonych w x dni')
         plt.xlabel('Dni')
         plt.ylabel('Nieobsluzeni klienci')
         plt.savefig(f"Wykres 11")

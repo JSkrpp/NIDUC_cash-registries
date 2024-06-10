@@ -6,6 +6,8 @@
   <component name="ChangeListManager">
     <list default="true" id="57c45f28-968a-4f0e-8bcf-c7dd7d520f24" name="Changes" comment="Naprawiono bład obslugi klienta, dodano rysowanie wykresow statystycznych">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/NiDUC-P_Sprawozdanie.docx" beforeDir="false" afterPath="$PROJECT_DIR$/NiDUC-P_Sprawozdanie.docx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/NiDUC-P_Sprawozdanie.pdf" beforeDir="false" afterPath="$PROJECT_DIR$/NiDUC-P_Sprawozdanie.pdf" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Simulation/Simulation.py" beforeDir="false" afterPath="$PROJECT_DIR$/Simulation/Simulation.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/main.py" beforeDir="false" afterPath="$PROJECT_DIR$/main.py" afterDir="false" />
     </list>
@@ -144,6 +146,8 @@
       <workItem from="1716889628148" duration="569000" />
       <workItem from="1716890207426" duration="101000" />
       <workItem from="1716891385069" duration="223000" />
+      <workItem from="1717782084838" duration="33000" />
+      <workItem from="1718050949351" duration="4423000" />
     </task>
     <task id="LOCAL-00001" summary="Added base number generator">
       <option name="closed" value="true" />
@@ -241,7 +245,15 @@
       <option name="project" value="LOCAL" />
       <updated>1716847966540</updated>
     </task>
-    <option name="localTasksCounter" value="13" />
+    <task id="LOCAL-00013" summary="Naprawiono bład obslugi klienta, dodano rysowanie wykresow statystycznych">
+      <option name="closed" value="true" />
+      <created>1717782101535</created>
+      <option name="number" value="00013" />
+      <option name="presentableId" value="LOCAL-00013" />
+      <option name="project" value="LOCAL" />
+      <updated>1717782101535</updated>
+    </task>
+    <option name="localTasksCounter" value="14" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -272,6 +284,6 @@
   </component>
   <component name="com.intellij.coverage.CoverageDataManagerImpl">
     <SUITE FILE_PATH="coverage/NIDUC_cash_registries$main.coverage" NAME="main Coverage Results" MODIFIED="1713640364253" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/../cos" />
-    <SUITE FILE_PATH="coverage/NIDUC_cash_registries$main__1_.coverage" NAME="main (1) Coverage Results" MODIFIED="1716891494440" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
+    <SUITE FILE_PATH="coverage/NIDUC_cash_registries$main__1_.coverage" NAME="main (1) Coverage Results" MODIFIED="1718055095493" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
   </component>
 </project>
